@@ -8,14 +8,14 @@ This project was intentionally built without any external SQL or Python preproce
 
 ## 📊 Dashboard Preview
 
-*(Add your screenshots here — Executive Overview page, Attrition Deep Dive page, and Mobile Layout preview)*
 
 ```
 /screenshots
   ├── executive_overview.png
   ├── attrition_deep_dive.png
-  └── mobile_layout.png
 ```
+![Executive Overview](screenshots/executive_overview.png)
+![Attrition Deep Dive](screenshots/attrition_deep_dive.png)
 
 ---
 
@@ -34,20 +34,20 @@ This project was intentionally built without any external SQL or Python preproce
 All ETL was performed natively in Power Query — no external preprocessing:
 
 - Verified and corrected data types column-by-column (Whole Number, Text)
-- Removed 3 constant-value columns adding no analytical value: `EmployeeCount`, `Over18`, `StandardHours`
+- Removed 3 constant-value columns adding no analytical value: EmployeeCount, Over18, StandardHours
 - Built two custom **conditional columns** using nested if-else logic:
-  - `AgeGroup` — bucketed into 18-25, 26-35, 36-45, 46-55, 56+
-  - `IncomeBand` — bucketed into Very Low, Low, Medium, High, Very High
+  - AgeGroup — bucketed into 18-25, 26-35, 36-45, 46-55, 56+
+  - IncomeBand — bucketed into Very Low, Low, Medium, High, Very High
 - Split repeated categorical fields into dedicated **dimension tables** via Reference queries (not full duplicates) to reduce redundancy and follow star schema principles:
-  - `Dim_Department`
-  - `Dim_JobRole`
-  - `Dim_EducationField`
+  - Dim_Department
+  - Dim_JobRole
+  - Dim_EducationField
 
 ---
 
 ## 🗂️ Data Model
 
-Built as a star schema — `Employees` as the central fact-style table, connected directly to three dimension tables:
+Built as a star schema — Employees as the central fact-style table, connected directly to three dimension tables:
 
 ```
         Dim_Department
@@ -103,7 +103,7 @@ SWITCH(
 
 ## 🔐 Row-Level Security
 
-Implemented **Dynamic RLS** using a department-mapping table and `USERPRINCIPALNAME()`:
+Implemented **Dynamic RLS** using a department-mapping table and USERPRINCIPALNAME():
 
 ```dax
 [Department] = LOOKUPVALUE(
@@ -141,5 +141,5 @@ Power BI Desktop (Power Query, Data Modeling, DAX, Report Design, Row-Level Secu
 
 ## 📎 Files in This Repo
 
-- `HR_Analytics_Dashboard.pbix` — full Power BI file (download and open in Power BI Desktop to explore interactively)
-- `/screenshots` — dashboard preview images
+- hr.pbix — full Power BI file (download and open in Power BI Desktop to explore interactively)
+- /screenshots — dashboard preview images
